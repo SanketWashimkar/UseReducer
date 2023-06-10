@@ -1,12 +1,13 @@
 import React from 'react';
 
 import './App.css';
-import AddValue from './AddValue/AddValue';
+import UserInfo from './component/UserInfo/UserInfo';
+
 
 function App() {
   return (
    <div>
-    <AddValue />
+  <UserInfo />
    </div>
   );
 }
