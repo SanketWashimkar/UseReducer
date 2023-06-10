@@ -27,7 +27,7 @@ const cmpDispatchFun = (newCmp: any) => {
 
   return (
     <div className={styless["user-wrapper"]}>
-      <div className={styless["from-control"]}>
+      <div className={styless["form-control"]}>
         <label htmlFor="userName">User Name</label>
         <input
           type="text"
@@ -38,7 +38,7 @@ const cmpDispatchFun = (newCmp: any) => {
           onChange={(e) => userDispatchFun(e.target.value)}
         />
       </div>
-      <div className={styless["from-control"]}>
+      <div className={styless["form-control"]}>
         <label htmlFor="age">Age</label>
         <input
           type="number"
@@ -49,7 +49,7 @@ const cmpDispatchFun = (newCmp: any) => {
           onChange={(e) =>  ageDispatchFun(e.target.value)}
         />
       </div>
-      <div className={styless["from-control"]}>
+      <div className={styless["form-control"]}>
         <label htmlFor="cmp">Company</label>
         <input
           type="text"
@@ -60,7 +60,7 @@ const cmpDispatchFun = (newCmp: any) => {
           onChange={(e) => cmpDispatchFun(e.target.value)}
         />
       </div>
-<button type = "button" onClick={submitData}> {""} </button>
+<button type = "button" onClick={submitData}> {""} Submit </button>
 
     </div>
   );
