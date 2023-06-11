@@ -1,32 +1,62 @@
-import { useReducer } from "react";
+import { useEffect, useReducer, useRef } from "react";
 import styless from "./UserInfo.module.scss";
 import ReducerFun, { intialUserState } from "../store/ReducerFun";
 
 const UserInfo = () => {
-const [state, dispatch] = useReducer(ReducerFun,  intialUserState);
+  const [state, dispatch] = useReducer(ReducerFun, intialUserState);
 
-const submitData = () => {
-    console.log ("state", state);
-};
+const ageInputRef : any = useRef();
+const dialogRef : any = useRef();
 
-const userDispatchFun = (newName: any) => {
-    dispatch({type: "setUserName", payload: {newName}});
-};
+useEffect(() => {
+    console.log('ageInput 1',ageInputRef?.current?.value)
+  }, [ageInputRef?.current?.value])
 
-const ageDispatchFun = (newAge: any) => {
-    dispatch({type: "setUserAge", payload: {newAge}});
-};
 
-const cmpDispatchFun = (newCmp: any) => {
-    if(state.userName=== newCmp){
-        alert("company name can not be same as user name");
-        return;
+  const submitData = () => {
+
+if(dialogRef?.current.open) {dialogRef.current.close()
+}else{
+    dialogRef?.current.showModal()
+}
+
+console.log("dialogRef",dialogRef?.current);
+
+if(ageInputRef?.current){
+    console.log("ageInputRef",ageInputRef.current);
+}
+
+    // console.log("state", state);
+  };
+
+  const userDispatchFun = (newName: any) => {
+    dispatch({ type: "setUserName", payload: { newName } });
+  };
+
+  const ageDispatchFun = (newAge: any) => {
+    dispatch({ type: "setUserAge", payload: { newAge } });
+  };
+
+  const cmpDispatchFun = (newCmp: any) => {
+    if (state.userName === newCmp) {
+      alert("company name can not be same as user name");
+      return;
     }
-    dispatch({type: "setUserCmp", payload: {newCmp}});
-};
+    dispatch({ type: "setUserCmp", payload: { newCmp } });
+  };
 
   return (
     <div className={styless["user-wrapper"]}>
+      <div className="dialog">
+        <dialog id="dialogTest" ref={dialogRef}>
+          <p id="ptag">Greetings, one and all!</p>
+
+          <button type="button" onClick={() => dialogRef.current.close()}>
+            OK
+          </button>
+        </dialog>
+      </div>
+      ageInput.value {ageInputRef?.current?.value}
       <div className={styless["form-control"]}>
         <label htmlFor="userName">User Name</label>
         <input
@@ -46,7 +76,7 @@ const cmpDispatchFun = (newCmp: any) => {
           placeholder="Enter your age"
           id="age"
           value={state.age}
-          onChange={(e) =>  ageDispatchFun(e.target.value)}
+          onChange={(e) => ageDispatchFun(e.target.value)}
         />
       </div>
       <div className={styless["form-control"]}>
@@ -60,8 +90,10 @@ const cmpDispatchFun = (newCmp: any) => {
           onChange={(e) => cmpDispatchFun(e.target.value)}
         />
       </div>
-<button type = "button" onClick={submitData}> {""} Submit </button>
-
+      <button type="button" onClick={submitData}>
+        {" "}
+      Submit
+      </button>
     </div>
   );
 };
